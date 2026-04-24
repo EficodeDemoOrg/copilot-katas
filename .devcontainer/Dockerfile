@@ -4,6 +4,7 @@ FROM mcr.microsoft.com/devcontainers/base:ubuntu-24.04
 # - Node.js 20 (satisfies Node.js 18+ requirement)
 # - Python 3 + pip
 # - .NET SDK 8
+# - uv (Python package/project manager)
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         ca-certificates \
@@ -20,5 +21,6 @@ RUN apt-get update \
     && rm /tmp/packages-microsoft-prod.deb \
     && apt-get update \
     && apt-get install -y --no-install-recommends dotnet-sdk-8.0 \
+    && curl -LsSf https://astral.sh/uv/install.sh | env UV_INSTALL_DIR=/usr/local/bin sh \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
